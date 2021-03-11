@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Aplicacao</string>
+    <string name="titulo">Título</string>
+    <string name="voltar">Voltar</string>
+</resources>
