@@ -15,6 +15,15 @@ public abstract class NotaDB : RoomDatabase() {
 
     abstract fun notaDao(): NotaDao
 
+    private class NotaDatabaseCallback(private  val scope: CoroutineScope) : RoomDatabase.Callback() {
+        override fun onOpen(db: SupportSQLiteDatabase) {
+            super.onOpen(db)
+            INSTANCE?.let { database -> scope.launch {
+                var  notaDao = database.notaDao()
+            } }
+        }
+    }
+
     companion object{
         @Volatile
         private var INSTANCE: NotaDB? = null
@@ -35,12 +44,4 @@ public abstract class NotaDB : RoomDatabase() {
         }
     }
 
-    private class NotaDatabaseCallback(private  val scope: CoroutineScope) : RoomDatabase.Callback() {
-        override fun onOpen(db: SupportSQLiteDatabase) {
-            super.onOpen(db)
-            INSTANCE?.let { database -> scope.launch {
-                var  notaDao = database.notaDao()
-            } }
-        }
-    }
 }
