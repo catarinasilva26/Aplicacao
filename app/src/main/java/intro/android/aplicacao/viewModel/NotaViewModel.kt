@@ -24,4 +24,8 @@ class NotaViewModel(application: Application) : AndroidViewModel(application) {
     fun insert(nota: Nota) = viewModelScope.launch(Dispatchers.IO){
         repository.inserir(nota)
     }
+
+    fun atualizarNota(titulo: String, conteudo: String, id: Int) = viewModelScope.launch {
+        repository.atualizarNota(titulo, conteudo, id)
+    }
 }

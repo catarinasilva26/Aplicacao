@@ -34,6 +34,13 @@ class AdicionarNota : AppCompatActivity() {
             }
             finish()
         }
+
+
+        val bt_voltar = findViewById<Button>(R.id.bt_voltar)
+        bt_voltar.setOnClickListener{
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
     companion object{
         const val  EXTRA_REPLY_TITULO = "titulo"
