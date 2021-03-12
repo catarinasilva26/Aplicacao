@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -37,6 +38,13 @@ class MainActivity : AppCompatActivity() {
         val adicionar = findViewById<ImageButton>(R.id.adicionarNota)
         adicionar.setOnClickListener{val intent = Intent(this@MainActivity, AdicionarNota::class.java)
         startActivityForResult(intent, newNotaActivityRequestCode)}
+
+        //Visualizar Nota
+        val nota_linha = findViewById<LinearLayout>(R.id.linha_nota)
+        nota_linha.setOnClickListener{
+            val intent = Intent(this@MainActivity, VisualizarNota::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
