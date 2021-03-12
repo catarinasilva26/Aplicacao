@@ -20,7 +20,6 @@ RecyclerView.Adapter<NotaAdapter.NotaViewHolder>(){
         val notaConteudo: TextView = itemView.findViewById(R.id.conteudo)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaAdapter.NotaViewHolder {
         val  itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
         return NotaViewHolder(itemView)

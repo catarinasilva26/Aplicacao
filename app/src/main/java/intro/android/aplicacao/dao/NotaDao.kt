@@ -6,7 +6,7 @@ import intro.android.aplicacao.entities.Nota
 
 @Dao
 interface NotaDao {
-    @Query("SELECT * FROM nota_tabela ORDER BY titulo ASC")
+    @Query("SELECT * FROM nota_tabela ORDER BY id DESC")
     fun getNotas(): LiveData<List<Nota>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

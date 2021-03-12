@@ -27,6 +27,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="8dp"
+        style="?android:attr/borderlessButtonStyle"
         android:backgroundTint="@android:color/transparent"
         android:drawableLeft="@drawable/voltar"
         android:text="@string/voltar"
@@ -59,6 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
+            android:textColor="@color/white"
             android:text="Adicionar"/>
     </RelativeLayout>
 

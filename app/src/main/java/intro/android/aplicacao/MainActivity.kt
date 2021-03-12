@@ -42,12 +42,13 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == newNotaActivityRequestCode && resultCode == Activity.RESULT_OK){
-            data?.getStringExtra(AdicionarNota.EXTRA_REPLY)?.let{
-                val nota = Nota(titulo = it, conteudo = it)
-                notaViewModel.insert(nota)
-            }
+            var titulo = data?.getStringExtra(AdicionarNota.EXTRA_REPLY_TITULO).toString()
+            var conteudo = data?.getStringExtra(AdicionarNota.EXTRA_REPLY_CONT).toString()
+            var notas = Nota(titulo = titulo, conteudo = conteudo)
+            notaViewModel.insert(notas)
+
         }else {
-            Toast.makeText(applicationContext, "Titulo vazio: não inserido", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
         }
     }
 }

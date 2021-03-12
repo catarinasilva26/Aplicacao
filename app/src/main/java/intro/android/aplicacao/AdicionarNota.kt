@@ -17,7 +17,7 @@ class AdicionarNota : AppCompatActivity() {
         setContentView(R.layout.activity_adicionar_nota)
 
          editTitulo = findViewById(R.id.editText_titulo)
-        editConteudo = findViewById(R.id.editText_conteudo)
+         editConteudo = findViewById(R.id.editText_conteudo)
         val bt_adicionar = findViewById<Button>(R.id.bt_adicionar)
         bt_adicionar.setOnClickListener{
             val replyIntent = Intent()
@@ -25,15 +25,18 @@ class AdicionarNota : AppCompatActivity() {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val titulo = editTitulo.text.toString()
+                replyIntent.putExtra(EXTRA_REPLY_TITULO, titulo)
+
                 val conteudo = editConteudo.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY, titulo)
-                replyIntent.putExtra(EXTRA_REPLY, conteudo)
+                replyIntent.putExtra(EXTRA_REPLY_CONT, conteudo)
+
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
         }
     }
     companion object{
-        const val  EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
+        const val  EXTRA_REPLY_TITULO = "titulo"
+        const val EXTRA_REPLY_CONT = "conteudo"
     }
 }
