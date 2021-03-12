@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
-            android:text="Adicionar"/>
+            android:text="@string/adicionar"/>
     </RelativeLayout>
 
 </LinearLayout>

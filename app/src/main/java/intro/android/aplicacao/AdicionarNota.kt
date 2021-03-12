@@ -21,7 +21,7 @@ class AdicionarNota : AppCompatActivity() {
         val bt_adicionar = findViewById<Button>(R.id.bt_adicionar)
         bt_adicionar.setOnClickListener{
             val replyIntent = Intent()
-            if(TextUtils.isEmpty(editTitulo.text) && TextUtils.isEmpty(editConteudo.text)){
+            if(TextUtils.isEmpty(editTitulo.text) || TextUtils.isEmpty(editConteudo.text)){
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             } else {
                 val titulo = editTitulo.text.toString()

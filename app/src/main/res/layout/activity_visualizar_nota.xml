@@ -57,7 +57,7 @@
             android:textColor="@color/black"/>
 
         <Button
-            android:id="@+id/bt_adicionar"
+            android:id="@+id/bt_guardar"
             android:layout_below="@+id/editText_conteudo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
-            android:text="Adicionar"/>
+            android:text="@string/guardar"/>
     </RelativeLayout>
 
 

@@ -4,9 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.text.Layout
+import android.view.View
+import android.widget.*
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,7 +16,8 @@ import intro.android.aplicacao.adapters.NotaAdapter
 import intro.android.aplicacao.entities.Nota
 import intro.android.aplicacao.viewModel.NotaViewModel
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(){
 
     private lateinit var notaViewModel: NotaViewModel
     private val newNotaActivityRequestCode = 1
@@ -24,11 +26,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+
         //Recycler View
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = NotaAdapter(this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        //recyclerView.setOnClickListener(View.OnClickListener { Toast.makeText(this, "Click", Toast.LENGTH_LONG).show() })
 
         //View Model
         notaViewModel = ViewModelProvider(this).get(NotaViewModel::class.java)
@@ -39,13 +44,8 @@ class MainActivity : AppCompatActivity() {
         adicionar.setOnClickListener{val intent = Intent(this@MainActivity, AdicionarNota::class.java)
         startActivityForResult(intent, newNotaActivityRequestCode)}
 
-        //Visualizar Nota
-        val nota_linha = findViewById<LinearLayout>(R.id.linha_nota)
-        nota_linha.setOnClickListener{
-            val intent = Intent(this@MainActivity, VisualizarNota::class.java)
-            startActivity(intent)
-        }
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -59,4 +59,5 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
         }
     }
+
 }

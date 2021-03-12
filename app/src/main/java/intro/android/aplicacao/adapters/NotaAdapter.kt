@@ -1,12 +1,16 @@
 package intro.android.aplicacao.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import intro.android.aplicacao.MainActivity
 import intro.android.aplicacao.R
+import intro.android.aplicacao.VisualizarNota
 import intro.android.aplicacao.entities.Nota
 
 class NotaAdapter internal  constructor(context: Context) :
@@ -15,9 +19,11 @@ RecyclerView.Adapter<NotaAdapter.NotaViewHolder>(){
     private val  inflater: LayoutInflater = LayoutInflater.from(context)
     private  var notas = emptyList<Nota>()
 
-    class NotaViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+     class NotaViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val notaTitulo: TextView = itemView.findViewById(R.id.titulo)
         val notaConteudo: TextView = itemView.findViewById(R.id.conteudo)
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotaAdapter.NotaViewHolder {
@@ -38,5 +44,7 @@ RecyclerView.Adapter<NotaAdapter.NotaViewHolder>(){
         this.notas = notas
         notifyDataSetChanged()
     }
+
+
 
 }
