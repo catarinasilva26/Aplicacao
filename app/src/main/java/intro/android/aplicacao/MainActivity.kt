@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity(), CellClickListener{
                 Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
             }
         } else if(requestCode == UpdateNotaActivityRequestCode) {
-
             if (requestCode == UpdateNotaActivityRequestCode && resultCode == Activity.RESULT_OK) {
                 var titulo = data?.getStringExtra(EXTRA_TITULO).toString()
                 var conteudo = data?.getStringExtra(EXTRA_CONTEUDO).toString()
