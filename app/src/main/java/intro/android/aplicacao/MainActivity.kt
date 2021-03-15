@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), CellClickListener{
     private lateinit var notaViewModel: NotaViewModel
     private val newNotaActivityRequestCode = 1
     private val UpdateNotaActivityRequestCode = 2
+    private val DeleteNotaActivityRequestCode = 3
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +56,18 @@ class MainActivity : AppCompatActivity(), CellClickListener{
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK){
+            if (data != null) {
+                if(data.action == "REMOVE"){
+                    var id = Integer.parseInt(data?.getStringExtra(EXTRA_ID))
+                    notaViewModel.eliminarNota(id)
+                    return
+                }
+            }
+        }
+
+
         if(requestCode == newNotaActivityRequestCode) {
             if (requestCode == newNotaActivityRequestCode && resultCode == Activity.RESULT_OK) {
                 var titulo = data?.getStringExtra(AdicionarNota.EXTRA_REPLY_TITULO).toString()
@@ -71,7 +85,7 @@ class MainActivity : AppCompatActivity(), CellClickListener{
                 var id = Integer.parseInt(data?.getStringExtra(EXTRA_ID))
                 notaViewModel.atualizarNota(titulo, conteudo, id)
             } else {
-                Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Campo vazio: não inserido2", Toast.LENGTH_LONG).show()
             }
         }
     }

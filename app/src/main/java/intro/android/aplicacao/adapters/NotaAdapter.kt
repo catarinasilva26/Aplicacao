@@ -39,6 +39,7 @@ RecyclerView.Adapter<NotaAdapter.NotaViewHolder>(){
         holder.notaTitulo.text = current.titulo
         holder.notaConteudo.text = current.conteudo
         holder.itemView.setOnClickListener { cellClickListener.onCellClickListener(current) }
+
     }
 
     internal fun setNotas(notas: List<Nota>){

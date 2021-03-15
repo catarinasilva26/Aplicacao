@@ -5,8 +5,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
+import android.view.ActionMode
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
@@ -19,14 +22,12 @@ import intro.android.aplicacao.viewModel.NotaViewModel
 class VisualizarNota : AppCompatActivity() {
 
     private lateinit var notaViewModel: NotaViewModel
-
     private lateinit var editTitulo: EditText
     private lateinit var editConteudo: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_visualizar_nota)
-
 
         //Nota selecionada
         val id = intent.getStringExtra(MainActivity.EXTRA_ID)
@@ -39,7 +40,7 @@ class VisualizarNota : AppCompatActivity() {
         editConteudo = findViewById(R.id.editText_conteudo)
         editConteudo.setText(conteudo)
 
-        //Bptão Voltar
+        //Botão Voltar
         val bt_voltar = findViewById<Button>(R.id.bt_voltar)
         bt_voltar.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -65,6 +66,18 @@ class VisualizarNota : AppCompatActivity() {
             }
             finish()
         }
+
+        val bt_eliminar = findViewById<ImageButton>(R.id.bt_eliminar)
+        bt_eliminar.setOnClickListener{
+            val reply = Intent()
+            reply.putExtra(MainActivity.EXTRA_ID, id.toString())
+            reply.setAction("REMOVE")
+            setResult(Activity.RESULT_OK, reply)
+            finish()
+        }
+
     }
+
+
 
 }
