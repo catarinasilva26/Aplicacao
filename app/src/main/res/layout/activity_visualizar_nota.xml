@@ -33,6 +33,18 @@
             android:text="@string/voltar"
             android:textColor="@color/blue"/>
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="22dp"
+            android:background="@drawable/eliminar"
+            android:id="@+id/bt_eliminar"/>
+
     </RelativeLayout>
 
     <RelativeLayout

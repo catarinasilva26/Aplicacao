@@ -15,6 +15,6 @@ interface NotaDao {
     @Query("DELETE FROM nota_tabela WHERE id == :id")
     suspend fun eliminarNota(id: Int)
 
-    @Query("UPDATE nota_tabela SET titulo=:titulo, conteudo=:conteudo WHERE id == :id")
+    @Query("UPDATE nota_tabela SET titulo=:titulo, conteudo=:conteudo WHERE id ==:id")
     suspend fun atualizarNota(titulo: String, conteudo: String, id: Int)
 }
