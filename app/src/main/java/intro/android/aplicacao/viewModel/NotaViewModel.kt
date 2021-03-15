@@ -28,4 +28,8 @@ class NotaViewModel(application: Application) : AndroidViewModel(application) {
     fun atualizarNota(titulo: String, conteudo: String, id: Int) = viewModelScope.launch {
         repository.atualizarNota(titulo, conteudo, id)
     }
+
+    fun eliminarNota(id: Int) = viewModelScope.launch {
+        repository.eliminarNota(id)
+    }
 }

@@ -15,4 +15,8 @@ class NotaRepository(private  val notaDao: NotaDao) {
     suspend fun atualizarNota(titulo : String, conteudo: String, id: Int){
         notaDao.atualizarNota(titulo, conteudo, id)
     }
+
+    suspend fun eliminarNota(id: Int){
+        notaDao.eliminarNota(id)
+    }
 }
