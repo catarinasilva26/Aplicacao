@@ -16,8 +16,11 @@ import intro.android.aplicacao.adapters.NotaAdapter
 import intro.android.aplicacao.entities.Nota
 import intro.android.aplicacao.viewModel.NotaViewModel
 
+const val EXTRA_ID = "id"
+const val EXTRA_TITULO = "titulo"
+const val EXTRA_CONTEUDO = "conteudo"
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), CellClickListener{
 
     private lateinit var notaViewModel: NotaViewModel
     private val newNotaActivityRequestCode = 1
@@ -29,9 +32,10 @@ class MainActivity : AppCompatActivity(){
 
         //Recycler View
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NotaAdapter(this)
+        val adapter = NotaAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+
 
         //recyclerView.setOnClickListener(View.OnClickListener { Toast.makeText(this, "Click", Toast.LENGTH_LONG).show() })
 
@@ -58,6 +62,20 @@ class MainActivity : AppCompatActivity(){
         }else {
             Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
         }
+    }
+
+    override fun onCellClickListener(data: Nota) {
+        //Toast.makeText(this, "Linha clicada ${data.titulo}", Toast.LENGTH_LONG).show()
+        val titulo = data.titulo
+        val conteudo = data.conteudo
+        val id = data.id
+        val intent = Intent(this, VisualizarNota::class.java).apply {
+            putExtra(EXTRA_ID, id)
+            putExtra(EXTRA_TITULO, titulo.toString())
+            putExtra(EXTRA_CONTEUDO, conteudo.toString())
+        }
+        startActivity(intent)
+
     }
 
 }
