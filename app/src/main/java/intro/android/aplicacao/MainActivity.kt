@@ -57,14 +57,10 @@ class MainActivity : AppCompatActivity(), CellClickListener{
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == Activity.RESULT_OK){
-            if (data != null) {
-                if(data.action == "REMOVE"){
+        if (resultCode == Activity.RESULT_OK && data != null && data.action == "REMOVE"){
                     var id = Integer.parseInt(data?.getStringExtra(EXTRA_ID))
                     notaViewModel.eliminarNota(id)
                     return
-                }
-            }
         }
 
 
