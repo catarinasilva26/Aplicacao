@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), CellClickListener{
                 var id = Integer.parseInt(data?.getStringExtra(EXTRA_ID))
                 notaViewModel.atualizarNota(titulo, conteudo, id)
             } else {
-                Toast.makeText(applicationContext, "Campo vazio: não inserido2", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
             }
         }
     }

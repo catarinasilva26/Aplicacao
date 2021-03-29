@@ -4,4 +4,6 @@
     <string name="voltar">Voltar</string>
     <string name="guardar">Guardar</string>
     <string name="adicionar">Adicionar</string>
+    <string name="notas">Notas</string>
+    <string name="login">Login</string>
 </resources>

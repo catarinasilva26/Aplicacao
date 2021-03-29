@@ -29,7 +29,7 @@
             android:textSize="34dp"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="Notas" />
+            android:text="@string/notas" />
 
         <ImageButton
             android:layout_width="wrap_content"

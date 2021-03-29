@@ -61,8 +61,8 @@
             android:layout_below="@+id/editText_conteudo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="250dp"
+            android:layout_height="56dp"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
             android:text="@string/adicionar"/>
