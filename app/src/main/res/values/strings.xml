@@ -6,4 +6,6 @@
     <string name="adicionar">Adicionar</string>
     <string name="notas">Notas</string>
     <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="nome">Nome</string>
 </resources>

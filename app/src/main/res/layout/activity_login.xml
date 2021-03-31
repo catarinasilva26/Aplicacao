@@ -29,7 +29,7 @@
             android:layout_below="@id/text_viewLogin"
             android:layout_marginTop="90dp"
             android:layout_centerHorizontal="true"
-            android:hint="Nome"
+            android:hint="@string/nome"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
             android:textSize="15dp"/>
@@ -39,7 +39,7 @@
             android:layout_below="@id/nome"
             android:layout_marginTop="20dp"
             android:layout_centerHorizontal="true"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword"
             android:layout_width="360dp"
             android:layout_height="wrap_content"
