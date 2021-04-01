@@ -15,6 +15,9 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class Login : AppCompatActivity() {
+    private lateinit var editNome: EditText
+    private lateinit var editPass: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -25,21 +28,23 @@ class Login : AppCompatActivity() {
             val intent = Intent(this@Login, MainActivity::class.java)
             startActivity(intent)
         }
+
+        editNome = findViewById(R.id.nome)
+        editPass = findViewById(R.id.password)
     }
 
     fun login(view: View) {
 
-        val editNome = findViewById<EditText>(R.id.nome)
-        val editPass = findViewById<EditText>(R.id.password)
-
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.login(nome = editNome.toString(), password = editPass.toString())
+        val nome = editNome.text.toString()
+        val pass = editPass.text.toString()
+        val call = request.login(nome = nome, password = pass)
 
         call.enqueue(object : Callback<OutputLogin>{
             override fun onResponse(call: Call<OutputLogin>, response: Response<OutputLogin>) {
                 if (response.isSuccessful){
                     val c: OutputLogin = response.body()!!
-                    Toast.makeText(this@Login, c.nome + "-" + c.password, Toast.LENGTH_LONG)
+                    Toast.makeText(this@Login, c.id , Toast.LENGTH_LONG)
                 }
             }
 
