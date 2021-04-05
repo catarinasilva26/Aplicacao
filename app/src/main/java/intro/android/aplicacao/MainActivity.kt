@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity(), CellClickListener{
         setContentView(R.layout.activity_main)
 
 
+        //Botão para voltar à pagina login
+        var login = findViewById<Button>(R.id.voltarLogin)
+        login.setOnClickListener {
+            val intent = Intent(this@MainActivity, Login::class.java)
+            startActivity(intent) }
+
         //Recycler View
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
         val adapter = NotaAdapter(this, this)

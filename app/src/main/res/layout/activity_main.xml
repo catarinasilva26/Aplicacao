@@ -31,6 +31,20 @@
             android:textStyle="bold"
             android:text="@string/notas" />
 
+        <Button
+            android:id="@+id/voltarLogin"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textAlignment="gravity"
+            android:gravity="end"
+            android:layout_marginBottom="80dp"
+            android:text="@string/login"
+            android:textColor="@color/blue" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
