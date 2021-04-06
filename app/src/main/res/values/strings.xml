@@ -8,4 +8,8 @@
     <string name="login">Login</string>
     <string name="password">Password</string>
     <string name="nome">Nome</string>
+    <string name="menu">Menu</string>
+    <string name="consultar_mapa">Consultar Mapa</string>
+    <string name="consultar_lista">Consultar Lista</string>
+    <string name="terminar_sessao">Terminar Sessão</string>
 </resources>
