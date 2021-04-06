@@ -44,12 +44,12 @@ class Login : AppCompatActivity() {
             override fun onResponse(call: Call<OutputLogin>, response: Response<OutputLogin>) {
                 if (response.isSuccessful){
                     val c: OutputLogin = response.body()!!
-                    Toast.makeText(this@Login, c.id , Toast.LENGTH_LONG)
+                    Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<OutputLogin>, t: Throwable) {
-                Toast.makeText(this@Login, "${t.message}", Toast.LENGTH_LONG)
+                Toast.makeText(this@Login, "${t.message}", Toast.LENGTH_LONG).show()
             }
         })
     }

@@ -7,6 +7,6 @@ import retrofit2.Call
 interface EndPoints {
 
     @FormUrlEncoded
-    @POST("login")
-    fun login(@Field("dados")nome: String?, password:String?): Call<OutputLogin>
+    @POST("/CM/api/login")
+    fun login(@Field("nome") nome: String, @Field("password") password: String): Call<OutputLogin>
 }
