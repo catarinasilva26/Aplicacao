@@ -57,7 +57,7 @@
             android:layout_height="56dp"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
-            android:text="@string/consultar_mapa"/>
+            android:text="@string/consultar_lista"/>
 
         <Button
             android:id="@+id/bt_reportar"
@@ -68,7 +68,7 @@
             android:layout_height="56dp"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
-            android:text="@string/consultar_lista"/>
+            android:text="@string/reportar_situacao"/>
 
         <Button
             android:id="@+id/logout"

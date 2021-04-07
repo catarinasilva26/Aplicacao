@@ -12,4 +12,5 @@
     <string name="consultar_mapa">Consultar Mapa</string>
     <string name="consultar_lista">Consultar Lista</string>
     <string name="terminar_sessao">Terminar Sessão</string>
+    <string name="reportar_situacao">Reportar Situação</string>
 </resources>
