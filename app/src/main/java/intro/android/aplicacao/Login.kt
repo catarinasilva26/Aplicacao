@@ -44,7 +44,17 @@ class Login : AppCompatActivity() {
             override fun onResponse(call: Call<OutputLogin>, response: Response<OutputLogin>) {
                 if (response.isSuccessful){
                     val c: OutputLogin = response.body()!!
-                    Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()
+                    if(nome.isEmpty() && pass.isEmpty()){
+                        Toast.makeText(this@Login, "Campos obrigatórios vazios", Toast.LENGTH_SHORT).show()
+                    } else{
+                        if (c.status == "false"){
+                            Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()
+                        }else{
+                            val intent = Intent(this@Login, Menu::class.java)
+                            startActivity(intent)
+                        }
+                    }
                 }
             }
 
