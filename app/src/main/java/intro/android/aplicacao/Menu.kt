@@ -12,6 +12,7 @@ class Menu : AppCompatActivity() {
 
     lateinit var preferences: SharedPreferences
     private lateinit var logout : Button
+    private lateinit var mapa : Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,12 @@ class Menu : AppCompatActivity() {
             val intent = Intent(this@Menu, Login::class.java)
             startActivity(intent)
             finish()
+        }
+
+        mapa = findViewById(R.id.bt_mapa)
+        mapa.setOnClickListener {
+            val intent = Intent(this@Menu, Mapa::class.java)
+            startActivity(intent)
         }
 
     }
