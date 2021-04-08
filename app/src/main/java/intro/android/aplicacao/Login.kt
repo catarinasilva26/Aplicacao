@@ -40,9 +40,11 @@ class Login : AppCompatActivity() {
         editPass = findViewById(R.id.password)
         checkBox = findViewById(R.id.lembrar)
 
+        //Criar a variével para verificar se queremos login automático ou não
         sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         isRemenbered = sharedPreferences.getBoolean("CHECKBOX", false)
 
+        //Verificamos aqui se o checkbox for selecionado redireciona para o Menu automaticamente
         if(isRemenbered){
             val intent = Intent(this@Login, Menu::class.java)
             startActivity(intent)
