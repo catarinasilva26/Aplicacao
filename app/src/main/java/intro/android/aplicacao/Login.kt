@@ -1,10 +1,13 @@
 package intro.android.aplicacao
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import intro.android.aplicacao.api.EndPoints
@@ -17,6 +20,10 @@ import retrofit2.Response
 class Login : AppCompatActivity() {
     private lateinit var editNome: EditText
     private lateinit var editPass: EditText
+    private lateinit var checkBox: CheckBox
+
+    lateinit var sharedPreferences: SharedPreferences
+    var isRemenbered = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +38,16 @@ class Login : AppCompatActivity() {
 
         editNome = findViewById(R.id.nome)
         editPass = findViewById(R.id.password)
+        checkBox = findViewById(R.id.lembrar)
+
+        sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        isRemenbered = sharedPreferences.getBoolean("CHECKBOX", false)
+
+        if(isRemenbered){
+            val intent = Intent(this@Login, Menu::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     fun login(view: View) {
@@ -38,6 +55,8 @@ class Login : AppCompatActivity() {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val nome = editNome.text.toString()
         val pass = editPass.text.toString()
+        val checked = checkBox.isChecked
+
         val call = request.login(nome = nome, password = pass)
 
         call.enqueue(object : Callback<OutputLogin>{
@@ -51,8 +70,16 @@ class Login : AppCompatActivity() {
                         if (c.status == "false"){
                             Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()
                         }else{
+
+                            val editor = sharedPreferences.edit()
+                            editor.putString("nome", nome)
+                            editor.putString("pass", pass)
+                            editor.putBoolean("CHECKBOX", checked)
+                            editor.apply()
+
                             val intent = Intent(this@Login, Menu::class.java)
                             startActivity(intent)
+                            finish()
                         }
                     }
                 }

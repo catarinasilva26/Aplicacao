@@ -45,6 +45,16 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"/>
 
+        <CheckBox
+            android:id="@+id/lembrar"
+            android:text="@string/lembrar_me"
+            android:textColor="@color/blue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/password"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"/>
+
         <Button
             android:id="@+id/bt_login"
             android:layout_below="@+id/password"
