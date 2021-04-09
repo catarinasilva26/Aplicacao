@@ -19,5 +19,5 @@ interface EndPoints {
                  @Field("descricao") descricao: String,
                  @Field("latitude") latitude: Int,
                  @Field("longitude") longitude: Int,
-                 @Field("utilizar_id") utilizador_id: Int)
+                 @Field("utilizar_id") utilizador_id: Int): Call<OutputReportar>
 }

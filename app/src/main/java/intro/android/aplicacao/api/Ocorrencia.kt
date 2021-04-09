@@ -6,7 +6,7 @@ data class Ocorrencia(
     val id: Int,
     val imagem: String,
     val descricao : String,
-    val latitude: Int,
-    val longitude: Int,
+    val latitude: String,
+    val longitude: String,
     val utilizador_id: Int
 )
