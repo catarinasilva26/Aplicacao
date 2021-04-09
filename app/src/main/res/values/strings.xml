@@ -15,4 +15,5 @@
     <string name="reportar_situacao">Reportar Situação</string>
     <string name="lembrar_me">Lembrar-me</string>
     <string name="title_activity_mapa">Map</string>
+    <string name="mapa">Mapa</string>
 </resources>
