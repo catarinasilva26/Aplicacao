@@ -12,4 +12,12 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("/CM/api/login")
     fun login(@Field("nome") nome: String, @Field("password") password: String): Call<OutputLogin>
+
+    @FormUrlEncoded
+    @POST("/CM/api/reportarSituacao")
+    fun reportar(@Field("imagem") imagem: String,
+                 @Field("descricao") descricao: String,
+                 @Field("latitude") latitude: Int,
+                 @Field("longitude") longitude: Int,
+                 @Field("utilizar_id") utilizador_id: Int)
 }

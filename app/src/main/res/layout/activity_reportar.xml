@@ -66,6 +66,7 @@
             android:id="@+id/imagem"
             android:layout_marginTop="90dp"
             android:layout_centerHorizontal="true"
+            android:drawableRight="@drawable/camera"
             android:hint="@string/imagem"
             android:layout_width="360dp"
             android:layout_height="wrap_content"

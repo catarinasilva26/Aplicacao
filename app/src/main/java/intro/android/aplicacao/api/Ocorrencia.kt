@@ -4,9 +4,9 @@ import android.media.Image
 
 data class Ocorrencia(
     val id: Int,
-    val image: Image,
+    val imagem: String,
     val descricao : String,
-    val latitude: String,
-    val longitude: String,
+    val latitude: Int,
+    val longitude: Int,
     val utilizador_id: Int
 )
