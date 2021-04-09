@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -25,6 +26,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var ocorrencias: List<Ocorrencia>
     private lateinit var voltarMenu : Button
+    private lateinit var reportar : ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +36,17 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        //Botão para voltar para o menu
         voltarMenu = findViewById(R.id.bt_menu)
         voltarMenu.setOnClickListener {
             val intent = Intent(this@Mapa, Menu::class.java)
+            startActivity(intent)
+        }
+
+        //Botão para reportar situação
+        reportar = findViewById(R.id.reportarSituacao)
+        reportar.setOnClickListener{
+            val intent = Intent(this@Mapa, Reportar::class.java)
             startActivity(intent)
         }
 

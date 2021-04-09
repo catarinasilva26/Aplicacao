@@ -16,4 +16,7 @@
     <string name="lembrar_me">Lembrar-me</string>
     <string name="title_activity_mapa">Map</string>
     <string name="mapa">Mapa</string>
+    <string name="descricao">Descrição</string>
+    <string name="imagem">Imagem</string>
+    <string name="reportar">Reportar</string>
 </resources>
