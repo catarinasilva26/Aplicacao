@@ -17,7 +17,7 @@ interface EndPoints {
     @POST("/CM/api/reportarSituacao")
     fun reportar(@Field("imagem") imagem: String,
                  @Field("descricao") descricao: String,
-                 @Field("latitude") latitude: Int,
-                 @Field("longitude") longitude: Int,
+                 @Field("latitude") latitude: String,
+                 @Field("longitude") longitude: String,
                  @Field("utilizar_id") utilizador_id: Int): Call<OutputReportar>
 }

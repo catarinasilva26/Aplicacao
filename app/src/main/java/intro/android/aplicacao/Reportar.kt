@@ -34,7 +34,7 @@ class Reportar : AppCompatActivity() {
     fun reportar(view: View) {
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.reportar(imagem ="teste", descricao =  "teste", latitude = 7, longitude =  7, utilizador_id = 1)
+        val call = request.reportar(imagem ="Imagem", descricao =  "Algarve", latitude = "37.019356", longitude =  "-7.930440", utilizador_id = 1)
 
         call.enqueue(object : Callback<OutputReportar>{
             override fun onResponse(call: Call<OutputReportar>, response: Response<OutputReportar>) {

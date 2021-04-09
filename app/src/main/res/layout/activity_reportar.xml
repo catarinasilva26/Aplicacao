@@ -84,7 +84,7 @@
             android:textSize="15dp"/>
 
         <Button
-            android:id="@+id/bt_login"
+            android:id="@+id/bt_reportar"
             android:layout_below="@+id/descricao"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
