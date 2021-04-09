@@ -18,6 +18,7 @@ class Reportar : AppCompatActivity() {
         voltarMenu.setOnClickListener {
             val intent = Intent(this@Reportar, Menu::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }

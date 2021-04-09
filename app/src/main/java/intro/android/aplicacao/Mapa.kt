@@ -41,6 +41,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         voltarMenu.setOnClickListener {
             val intent = Intent(this@Mapa, Menu::class.java)
             startActivity(intent)
+            finish()
         }
 
         //Botão para reportar situação
@@ -48,6 +49,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         reportar.setOnClickListener{
             val intent = Intent(this@Mapa, Reportar::class.java)
             startActivity(intent)
+            finish()
         }
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
