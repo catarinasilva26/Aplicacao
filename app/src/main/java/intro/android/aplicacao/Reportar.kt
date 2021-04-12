@@ -17,6 +17,7 @@ import retrofit2.Response
 class Reportar : AppCompatActivity() {
 
     private lateinit var voltarMenu : Button
+    private lateinit var editDescr: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +30,17 @@ class Reportar : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        editDescr = findViewById(R.id.descricao)
     }
 
     fun reportar(view: View) {
 
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.reportar(imagem ="Imagem", descricao =  "Algarve", latitude = "37.019356", longitude =  "-7.930440", utilizador_id = 1)
+
+        val descricao = editDescr.text.toString()
+
+        val call = request.reportar(imagem ="Imagem", descricao =  descricao, latitude = "37.019356", longitude =  "-7.930440", utilizador_id = 1)
 
         call.enqueue(object : Callback<OutputReportar>{
             override fun onResponse(call: Call<OutputReportar>, response: Response<OutputReportar>) {
