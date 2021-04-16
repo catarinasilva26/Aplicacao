@@ -75,7 +75,17 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                     ocorrencias = response.body()!!
                     for(ocorrencia in ocorrencias){
                         position = LatLng(ocorrencia.latitude.toString().toDouble(), ocorrencia.longitude.toString().toDouble())
-                        mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.descricao + "-" + ocorrencia.utilizador_id))
+                        mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.descricao).snippet(ocorrencia.utilizador_id.toString()))
+                        mMap.setOnInfoWindowClickListener {
+                            val intent = Intent(this@Mapa, EditarReporte::class.java).apply {
+                                putExtra(EXTRA_IMAGE, ocorrencia.imagem)
+                                putExtra(EXTRA_DESCRICAO, ocorrencia.descricao)
+                                putExtra(EXTRA_LATITUDE, ocorrencia.latitude)
+                                putExtra(EXTRA_LONGITUDE, ocorrencia.longitude)
+                                putExtra(EXTRA_UTILIZADOR_ID, ocorrencia.utilizador_id.toString())
+                            }
+                            startActivity(intent)
+                        }
                     }
                 }
             }
@@ -83,6 +93,15 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this@Mapa, "${t.message}", Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    companion object{
+        const val EXTRA_UTILIZADOR_ID = "utilizador_id"
+        const val EXTRA_IMAGE = "image"
+        const val EXTRA_DESCRICAO = "descricao"
+        const val EXTRA_LATITUDE = "latitude"
+        const val EXTRA_LONGITUDE = "longitude"
+
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
