@@ -1,11 +1,17 @@
 package intro.android.aplicacao
 
+import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -28,6 +34,10 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var voltarMenu : Button
     private lateinit var reportar : ImageButton
 
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
@@ -35,6 +45,9 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        //Iniciar fusedlocationproviderclient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         //Botão para voltar para o menu
         voltarMenu = findViewById(R.id.bt_menu)
@@ -62,7 +75,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
                     ocorrencias = response.body()!!
                     for(ocorrencia in ocorrencias){
                         position = LatLng(ocorrencia.latitude.toString().toDouble(), ocorrencia.longitude.toString().toDouble())
-                        mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.descricao))
+                        mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.descricao + "-" + ocorrencia.utilizador_id))
                     }
                 }
             }
@@ -76,8 +89,30 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(41.4079700, -8.5197800)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marcado em Famalicão"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        //val sydney = LatLng(41.4079700, -8.5197800)
+        //mMap.addMarker(MarkerOptions().position(sydney).title("Marcado em Famalicão"))
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        setUpMap()
+    }
+
+    fun setUpMap(){
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        } else {
+            mMap.isMyLocationEnabled = true
+
+            fusedLocationClient.lastLocation.addOnSuccessListener(this) {
+                location ->
+
+                if(location != null){
+                    lastLocation = location
+                    //Toast.makeText(this@Mapa, lastLocation.toString(), Toast.LENGTH_SHORT).show()
+                    val currentLatLong = LatLng(location.latitude, location.longitude)
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))
+                }
+            }
+        }
     }
 }

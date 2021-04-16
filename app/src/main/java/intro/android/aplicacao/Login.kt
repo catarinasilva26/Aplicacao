@@ -74,6 +74,7 @@ class Login : AppCompatActivity() {
                         }else{
 
                             val editor = sharedPreferences.edit()
+                            editor.putInt("id", c.id)
                             editor.putString("nome", nome)
                             editor.putString("pass", pass)
                             editor.putBoolean("CHECKBOX", checked)

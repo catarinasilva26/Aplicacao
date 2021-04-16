@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Aplicacao</string>
+    <string name="app_name">MarkedCity</string>
     <string name="titulo">Título</string>
     <string name="voltar">Voltar</string>
     <string name="guardar">Guardar</string>
     <string name="adicionar">Adicionar</string>
     <string name="notas">Notas</string>
-    <string name="login">Login</string>
+    <string name="login">Entrar</string>
     <string name="password">Password</string>
     <string name="nome">Nome</string>
     <string name="menu">Menu</string>

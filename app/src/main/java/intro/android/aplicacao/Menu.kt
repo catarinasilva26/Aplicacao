@@ -36,14 +36,12 @@ class Menu : AppCompatActivity() {
         mapa.setOnClickListener {
             val intent = Intent(this@Menu, Mapa::class.java)
             startActivity(intent)
-            finish()
         }
 
         reportar = findViewById(R.id.bt_reportar)
         reportar.setOnClickListener {
             val intent = Intent(this@Menu, Reportar::class.java)
             startActivity(intent)
-            finish()
         }
 
     }
