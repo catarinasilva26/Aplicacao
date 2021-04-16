@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +16,9 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
+import com.google.android.gms.maps.model.LatLng
 import intro.android.aplicacao.api.EndPoints
 import intro.android.aplicacao.api.OutputReportar
 import intro.android.aplicacao.api.ServiceBuilder
@@ -31,10 +36,16 @@ class Reportar : AppCompatActivity() {
     private lateinit var editDescr: EditText
     private lateinit var imagemSelecionada: ImageView
 
-    private var fileUri: Uri? = null
-    private lateinit var bitmap: Bitmap
-    private var mediaPath: String? = null
-    private var postPath: String? = null
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+    private lateinit var lastLocation: Location
+
 
 
     val REQUEST_CODE = 100
@@ -57,6 +68,50 @@ class Reportar : AppCompatActivity() {
         editDescr = findViewById(R.id.descricao)
         imagemSelecionada = findViewById(R.id.imagemSelecionada)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        //Momento em que recebemos as coordenadas a partir do LocationResult e atribuimos a cada variável
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult?) {
+                super.onLocationResult(p0)
+                lastLocation = p0?.lastLocation!!
+                latitude =lastLocation.latitude
+                longitude = lastLocation.longitude
+
+            }
+        }
+
+        createLocationRequest()
+    }
+
+    //Criar o pedido para obter a localização de 10000 em 10000 e com a maior precisão possivel
+    private fun createLocationRequest(){
+        locationRequest = LocationRequest()
+        locationRequest.interval = 10000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    //onPause para otimizar a utilização da app
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    //onResume onde iremos receber as coordenadas
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    //Dispara para fazer pedido de coordenadas ao satélite
+    private  fun startLocationUpdates(){
+        if( ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+
+        //Fazemos o pedido de coordenadas com base no request e no callback
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
     fun reportar(view: View) {
@@ -66,7 +121,10 @@ class Reportar : AppCompatActivity() {
         val descricao = editDescr.text.toString()
         val id = preferences.getInt("id", 0)
 
-        val call = request.reportar(imagem ="Imagem", descricao =  descricao, latitude = "37.5231028", longitude =  " -8.78671111 ", utilizador_id = id)
+        val latitude = latitude
+        val longitude = longitude
+
+        val call = request.reportar(imagem ="Imagem", descricao =  descricao, latitude = latitude.toString(), longitude =  longitude.toString(), utilizador_id = id)
 
         call.enqueue(object : Callback<OutputReportar>{
             override fun onResponse(call: Call<OutputReportar>, response: Response<OutputReportar>) {
