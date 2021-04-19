@@ -93,13 +93,12 @@
             android:textSize="15dp"/>
 
         <Button
-            android:id="@+id/bt_reportar"
+            android:id="@+id/bt_guardar"
             android:layout_below="@+id/descricao"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="30dp"
             android:layout_width="300dp"
             android:layout_height="56dp"
-            android:onClick="editar"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
             android:text="@string/guardar"/>

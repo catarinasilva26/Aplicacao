@@ -39,14 +39,11 @@ class Reportar : AppCompatActivity() {
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
 
-
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
     private lateinit var lastLocation: Location
-
-
 
     val REQUEST_CODE = 100
 
@@ -84,7 +81,7 @@ class Reportar : AppCompatActivity() {
         createLocationRequest()
     }
 
-    //Criar o pedido para obter a localização de 10000 em 10000 e com a maior precisão possivel
+    //Criar o pedido para obter a localização de 10 em 10 segundos e com a maior precisão possivel
     private fun createLocationRequest(){
         locationRequest = LocationRequest()
         locationRequest.interval = 10000

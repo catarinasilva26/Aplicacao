@@ -1,35 +1,130 @@
 package intro.android.aplicacao
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
+import intro.android.aplicacao.api.EndPoints
+import intro.android.aplicacao.api.ServiceBuilder
 
 class EditarReporte : AppCompatActivity() {
     val REQUEST_CODE = 100
 
+    lateinit var preferences: SharedPreferences
     private lateinit var imagemSelecionada: ImageView
     private lateinit var editDescricao: EditText
+
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+    private val LOCATION_PERMISSION_REQUEST_CODE = 1
+
+    //Localização
+    private lateinit var lastLocation: Location
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editar_reporte)
 
+        //Inicializar o fusedLocationClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        //Id do utilizador logado
+        preferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+        val id = preferences.getInt("id", 0)
+
         //Reporte selecionado
-        //Nota selecionada
-        val utilizador_id = intent.getStringExtra(Mapa.EXTRA_UTILIZADOR_ID)
+        val idReporte = intent.getStringExtra(Mapa.EXTRA_ID)
         val imagem = intent.getStringExtra(Mapa.EXTRA_IMAGE)
         val descricao = intent.getStringExtra(Mapa.EXTRA_DESCRICAO)
-        val latitude = intent.getStringExtra(Mapa.EXTRA_LATITUDE)
-        val longitude = intent.getStringExtra(Mapa.EXTRA_LONGITUDE)
+        val latitudeReporte = intent.getStringExtra(Mapa.EXTRA_LATITUDE)
+        val longitudeReporte = intent.getStringExtra(Mapa.EXTRA_LONGITUDE)
+        val utilizador_id = intent.getStringExtra(Mapa.EXTRA_UTILIZADOR_ID)
 
         editDescricao = findViewById(R.id.descricao)
         editDescricao.setText(descricao)
 
         imagemSelecionada = findViewById(R.id.imagemSelecionada)
+
+        //Momento em que recebemos as coordenadas a partir do LocationResult e atribuimos a cada variável
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(p0: LocationResult?) {
+                super.onLocationResult(p0)
+                lastLocation = p0?.lastLocation!!
+                latitude =lastLocation.latitude
+                longitude = lastLocation.longitude
+            }
+        }
+
+        //Editar reporte
+        val bt_guardar = findViewById<Button>(R.id.bt_guardar)
+        bt_guardar.setOnClickListener {
+            val replyIntent = Intent()
+            if(utilizador_id == id.toString()){
+                //Descrição
+                val descricao = editDescricao.text.toString()
+                replyIntent.putExtra(Mapa.EXTRA_DESCRICAO, descricao)
+
+                //Mantém o utilizador id
+                replyIntent.putExtra(Mapa.EXTRA_UTILIZADOR_ID, id)
+
+                //Localização
+                replyIntent.putExtra(Mapa.EXTRA_LATITUDE, latitude)
+                replyIntent.putExtra(Mapa.EXTRA_LONGITUDE, longitude)
+
+                setResult(Activity.RESULT_OK, replyIntent)
+
+            }else {
+                setResult(Activity.RESULT_CANCELED, replyIntent)
+            }
+            finish()
+        }
+
+
+        createLocationRequest()
+    }
+
+    //Criar o pedido para obter a localização de 10 em 10 segundos e com a maior precisão possivel
+    private fun createLocationRequest(){
+        locationRequest = LocationRequest()
+        locationRequest.interval = 10000
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+    }
+
+    //onPause para otimizar a utilização da app
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+    //onResume onde iremos receber as coordenadas
+    override fun onResume() {
+        super.onResume()
+        startLocationUpdates()
+    }
+
+    //Dispara para fazer pedido de coordenadas ao satélite
+    private  fun startLocationUpdates(){
+        if( ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+            return
+        }
+
+        //Fazemos o pedido de coordenadas com base no request e no callback
+        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null)
     }
 
     //Abrir a galeria para selecionar a foto pretendida
@@ -47,5 +142,4 @@ class EditarReporte : AppCompatActivity() {
         }
     }
 
-    fun editar(view: View) {}
 }
