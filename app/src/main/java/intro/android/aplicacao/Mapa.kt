@@ -166,6 +166,29 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
     //Resultado do UPDATE
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+
+        //Eliminar Situação
+        if(resultCode == Activity.RESULT_OK && data != null && data.action == "REMOVE"){
+            var id = data?.getStringExtra(EXTRA_ID)
+
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call = request.eliminarSituacaoId(id)
+            call.enqueue(object : Callback<OutputEliminar>{
+                override fun onFailure(call: Call<OutputEliminar>, t: Throwable) {
+                    Toast.makeText(this@Mapa, "${t.message}", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<OutputEliminar>, response: Response<OutputEliminar>) {
+                    if(response.isSuccessful){
+                        val c: OutputEliminar = response.body()!!
+                        Toast.makeText(this@Mapa, c.msg , Toast.LENGTH_LONG).show()
+                    }
+                }
+            })
+            return
+        }
+
+        //Atualizar Situação
         if(requestCode == UpdateReporteActivityRequestCode && resultCode == Activity.RESULT_OK){
             var descricao = data?.getStringExtra(EXTRA_DESCRICAO).toString()
             var latitude = data?.getStringExtra(EXTRA_LATITUDE).toString()

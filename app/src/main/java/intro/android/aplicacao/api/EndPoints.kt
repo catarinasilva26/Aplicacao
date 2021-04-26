@@ -32,4 +32,7 @@ interface EndPoints {
                             @Field("latitude") latitude: String,
                             @Field("longitude") longitude: String,
                             @Field("utilizador_id") utilizador_id: Int) : Call<OutputAtualizar>
+
+    @POST("CM/api/eliminarSituacao/{id}")
+    fun eliminarSituacaoId(@Path("id") id:String?): Call<OutputEliminar>
 }

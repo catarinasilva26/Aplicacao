@@ -128,6 +128,7 @@ class Reportar : AppCompatActivity() {
                 if(response.isSuccessful){
                     val c: OutputReportar = response.body()!!
                     Toast.makeText(this@Reportar, c.msg , Toast.LENGTH_LONG).show()
+                    finish()
                 }
             }
 

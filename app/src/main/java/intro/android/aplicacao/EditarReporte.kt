@@ -9,10 +9,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import intro.android.aplicacao.api.EndPoints
@@ -25,6 +22,7 @@ class EditarReporte : AppCompatActivity() {
     private lateinit var imagemSelecionada: ImageView
     private lateinit var editDescricao: EditText
     private lateinit var voltarMenu : Button
+    private lateinit var eliminarSituacao :Button
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
@@ -77,6 +75,23 @@ class EditarReporte : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+        //Eliminar reporte
+        val bt_eliminar = findViewById<ImageButton>(R.id.bt_eliminar)
+        bt_eliminar.setOnClickListener {
+            val reply = Intent()
+            if(utilizador_id == id.toString()){
+                //ID de reporte
+                reply.putExtra(Mapa.EXTRA_ID, idReporte.toString())
+                reply.setAction("REMOVE")
+                setResult(Activity.RESULT_OK, reply)
+            } else {
+                setResult(Activity.RESULT_CANCELED, reply)
+            }
+
+            finish()
+        }
+
 
         //Editar reporte
         val bt_guardar = findViewById<Button>(R.id.bt_guardar)
