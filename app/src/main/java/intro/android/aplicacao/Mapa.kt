@@ -22,9 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import intro.android.aplicacao.api.EndPoints
-import intro.android.aplicacao.api.Ocorrencia
-import intro.android.aplicacao.api.ServiceBuilder
+import intro.android.aplicacao.api.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -69,6 +67,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
             finish()
         }
 
+        //Listar todas as situações (Adicionar markers no mapa com as situações)
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getSituacoes()
         var position : LatLng
@@ -89,7 +88,6 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
             }
         })
     }
-
 
     companion object{
         const val EXTRA_UTILIZADOR_ID = "utilizador_id"
@@ -113,6 +111,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
         setUpMap()
     }
 
+    //Verifica a permissão a localização e depois insere o marcador na localização atual e adiciona uma animação
     fun setUpMap(){
         if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
@@ -135,6 +134,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
         }
     }
 
+    //Click para obter info individual de uma situacao
     override fun onInfoWindowClick(p0: Marker?) {
         val request = ServiceBuilder.buildService(EndPoints::class.java)
         val call = request.getSituacaoId(p0?.title)
@@ -145,7 +145,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
                     ocorrencias = response.body()!!
                     for(ocorrencia in ocorrencias){
                         val intent = Intent(this@Mapa, EditarReporte::class.java).apply {
-                            putExtra(EXTRA_ID, ocorrencia.id)
+                            putExtra(EXTRA_ID, ocorrencia.id.toString())
                             putExtra(EXTRA_IMAGE, ocorrencia.imagem)
                             putExtra(EXTRA_DESCRICAO, ocorrencia.descricao)
                             putExtra(EXTRA_LATITUDE, ocorrencia.latitude)
@@ -163,14 +163,32 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
         })
     }
 
+    //Resultado do UPDATE
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == UpdateReporteActivityRequestCode && resultCode == Activity.RESULT_OK){
             var descricao = data?.getStringExtra(EXTRA_DESCRICAO).toString()
             var latitude = data?.getStringExtra(EXTRA_LATITUDE).toString()
             var longitude = data?.getStringExtra(EXTRA_LONGITUDE).toString()
-            var utilizador_id = data?.getStringExtra(EXTRA_UTILIZADOR_ID).toString()
+            var utilizador_id = data?.getStringExtra(EXTRA_UTILIZADOR_ID).toString().toInt()
+            var id = data?.getStringExtra(EXTRA_ID)
 
+            val request = ServiceBuilder.buildService(EndPoints::class.java)
+            val call =  request.atualizarSituacaoId(id = id, imagem = "Imagem", descricao = descricao, latitude = latitude, longitude = longitude, utilizador_id = utilizador_id)
+
+            call.enqueue(object : Callback<OutputAtualizar>{
+                override fun onFailure(call: Call<OutputAtualizar>, t: Throwable) {
+                    Toast.makeText(this@Mapa, "${t.message}", Toast.LENGTH_LONG).show()
+                }
+
+                override fun onResponse(call: Call<OutputAtualizar>, response: Response<OutputAtualizar>) {
+                    if(response.isSuccessful){
+                        val c: OutputAtualizar = response.body()!!
+                        Toast.makeText(this@Mapa, c.msg , Toast.LENGTH_LONG).show()
+                    }
+                }
+
+            })
         }else {
             Toast.makeText(this@Mapa, "Permissão Inválida: Não pode editar", Toast.LENGTH_SHORT).show()
         }

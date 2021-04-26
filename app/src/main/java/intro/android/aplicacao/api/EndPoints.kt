@@ -1,13 +1,11 @@
 package intro.android.aplicacao.api
 
+import androidx.lifecycle.LiveData
 import retrofit2.http.*
 import retrofit2.Call
 
 
 interface EndPoints {
-    @POST("/CM/api/editarSituacao/{id}")
-    fun atualizarSituacaoId(@Path("id") id: String?) : Call<List<Ocorrencia>>
-
     @GET("/CM/api/situacoes")
     fun getSituacoes() : Call<List<Ocorrencia>>
 
@@ -25,4 +23,13 @@ interface EndPoints {
                  @Field("latitude") latitude: String,
                  @Field("longitude") longitude: String,
                  @Field("utilizador_id") utilizador_id: Int): Call<OutputReportar>
+
+    @FormUrlEncoded
+    @POST("/CM/api/editarSituacao/{id}")
+    fun atualizarSituacaoId(@Path("id") id: String?,
+                            @Field("imagem") imagem: String,
+                            @Field("descricao") descricao: String,
+                            @Field("latitude") latitude: String,
+                            @Field("longitude") longitude: String,
+                            @Field("utilizador_id") utilizador_id: Int) : Call<OutputAtualizar>
 }

@@ -24,6 +24,7 @@ class EditarReporte : AppCompatActivity() {
     lateinit var preferences: SharedPreferences
     private lateinit var imagemSelecionada: ImageView
     private lateinit var editDescricao: EditText
+    private lateinit var voltarMenu : Button
 
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
@@ -69,6 +70,14 @@ class EditarReporte : AppCompatActivity() {
             }
         }
 
+        //Botão para voltar para o menu
+        voltarMenu = findViewById(R.id.bt_menu)
+        voltarMenu.setOnClickListener {
+            val intent = Intent(this@EditarReporte, Menu::class.java)
+            startActivity(intent)
+            finish()
+        }
+
         //Editar reporte
         val bt_guardar = findViewById<Button>(R.id.bt_guardar)
         bt_guardar.setOnClickListener {
@@ -79,11 +88,14 @@ class EditarReporte : AppCompatActivity() {
                 replyIntent.putExtra(Mapa.EXTRA_DESCRICAO, descricao)
 
                 //Mantém o utilizador id
-                replyIntent.putExtra(Mapa.EXTRA_UTILIZADOR_ID, id)
+                replyIntent.putExtra(Mapa.EXTRA_UTILIZADOR_ID, id.toString())
 
                 //Localização
-                replyIntent.putExtra(Mapa.EXTRA_LATITUDE, latitude)
-                replyIntent.putExtra(Mapa.EXTRA_LONGITUDE, longitude)
+                replyIntent.putExtra(Mapa.EXTRA_LATITUDE, latitude.toString())
+                replyIntent.putExtra(Mapa.EXTRA_LONGITUDE, longitude.toString())
+
+                //ID de reporte
+                replyIntent.putExtra(Mapa.EXTRA_ID, idReporte.toString())
 
                 setResult(Activity.RESULT_OK, replyIntent)
 
