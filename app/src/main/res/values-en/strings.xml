@@ -22,4 +22,5 @@
     <string name="reportar">Report</string>
     <string name="campos_vazios">Required empty fields</string>
     <string name="permissao_invalida">Invalid Permission</string>
+    <string name="conteudo">Content</string>
 </resources>

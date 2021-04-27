@@ -21,4 +21,5 @@
     <string name="reportar">Reportar</string>
     <string name="campos_vazios">Campos obrigatórios vazios</string>
     <string name="permissao_invalida">Permissão inválida</string>
+    <string name="conteudo">Conteúdo</string>
 </resources>

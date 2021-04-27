@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:orientation="vertical"
+    tools:context=".Login">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_viewLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:textSize="34dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="@string/login" />
+
+        <EditText
+            android:id="@+id/nome"
+            android:layout_below="@id/text_viewLogin"
+            android:layout_marginTop="30dp"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/nome"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"/>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_below="@id/nome"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"/>
+
+        <CheckBox
+            android:id="@+id/lembrar"
+            android:text="@string/lembrar_me"
+            android:textColor="@color/blue"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/password"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/password">
+            <Button
+                android:id="@+id/bt_login"
+                android:layout_marginTop="70dp"
+                android:layout_toRightOf="@+id/bt_notas"
+                android:layout_width="250dp"
+                android:layout_height="56dp"
+                android:backgroundTint="@color/blue"
+                android:textColor="@color/white"
+                android:onClick="login"
+                android:text="@string/login"/>
+
+            <Button
+                android:id="@+id/bt_notas"
+                android:layout_width="250dp"
+                android:layout_height="56dp"
+                android:layout_marginTop="70dp"
+                android:backgroundTint="@color/blue"
+                android:text="@string/notas"
+                android:textColor="@color/white" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
