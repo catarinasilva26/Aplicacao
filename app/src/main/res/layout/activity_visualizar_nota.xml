@@ -66,7 +66,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black"
+            android:hint="@string/conteudo"/>
 
         <Button
             android:id="@+id/bt_guardar"
