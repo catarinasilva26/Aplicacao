@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), CellClickListener{
                 notaViewModel.insert(notas)
 
             } else {
-                Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, R.string.campos_vazios, Toast.LENGTH_LONG).show()
             }
         } else if(requestCode == UpdateNotaActivityRequestCode) {
             if (requestCode == UpdateNotaActivityRequestCode && resultCode == Activity.RESULT_OK) {
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), CellClickListener{
                 var id = Integer.parseInt(data?.getStringExtra(EXTRA_ID))
                 notaViewModel.atualizarNota(titulo, conteudo, id)
             } else {
-                Toast.makeText(applicationContext, "Campo vazio: não inserido", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, R.string.campos_vazios, Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -215,7 +215,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
 
             })
         }else {
-            Toast.makeText(this@Mapa, "Permissão Inválida", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@Mapa, R.string.permissao_invalida, Toast.LENGTH_SHORT).show()
         }
     }
 

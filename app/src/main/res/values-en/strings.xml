@@ -20,4 +20,6 @@
     <string name="descricao">Description</string>
     <string name="imagem">Image</string>
     <string name="reportar">Report</string>
+    <string name="campos_vazios">Required empty fields</string>
+    <string name="permissao_invalida">Invalid Permission</string>
 </resources>

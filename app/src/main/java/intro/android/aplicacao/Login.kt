@@ -67,7 +67,7 @@ class Login : AppCompatActivity() {
                     val c: OutputLogin = response.body()!!
                     //Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()
                     if(nome.isEmpty() && pass.isEmpty()){
-                        Toast.makeText(this@Login, "Campos obrigatórios vazios", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@Login, R.string.campos_vazios, Toast.LENGTH_SHORT).show()
                     } else{
                         if (c.status == "false"){
                             Toast.makeText(this@Login, c.msg , Toast.LENGTH_LONG).show()

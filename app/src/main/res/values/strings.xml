@@ -19,4 +19,6 @@
     <string name="descricao">Descrição</string>
     <string name="imagem">Imagem</string>
     <string name="reportar">Reportar</string>
+    <string name="campos_vazios">Campos obrigatórios vazios</string>
+    <string name="permissao_invalida">Permissão inválida</string>
 </resources>
