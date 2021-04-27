@@ -46,7 +46,7 @@
             android:layout_height="56dp"
             android:backgroundTint="@color/blue"
             android:textColor="@color/white"
-            android:text="Consultar Mapa"/>
+            android:text="@string/consultar_mapa"/>
 
         <Button
             android:id="@+id/bt_lista"

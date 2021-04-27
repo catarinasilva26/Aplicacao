@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MarkedCity</string>
+    <string name="titulo">Title</string>
+    <string name="voltar">Back</string>
+    <string name="guardar">Save</string>
+    <string name="adicionar">Add</string>
+    <string name="notas">Notes</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="nome">Name</string>
+    <string name="menu">Menu</string>
+    <string name="consultar_mapa">Consult Map</string>
+    <string name="consultar_lista">Consult List</string>
+    <string name="terminar_sessao">Logout</string>
+    <string name="reportar_situacao">Report Situation</string>
+    <string name="lembrar_me">Remember me</string>
+    <string name="title_activity_mapa">Map</string>
+    <string name="mapa">Map</string>
+    <string name="descricao">Description</string>
+    <string name="imagem">Image</string>
+    <string name="reportar">Report</string>
+</resources>

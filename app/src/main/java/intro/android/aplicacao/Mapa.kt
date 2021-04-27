@@ -182,6 +182,7 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
                     if(response.isSuccessful){
                         val c: OutputEliminar = response.body()!!
                         Toast.makeText(this@Mapa, c.msg , Toast.LENGTH_LONG).show()
+                        finish()
                     }
                 }
             })
@@ -208,12 +209,13 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
                     if(response.isSuccessful){
                         val c: OutputAtualizar = response.body()!!
                         Toast.makeText(this@Mapa, c.msg , Toast.LENGTH_LONG).show()
+                        finish()
                     }
                 }
 
             })
         }else {
-            Toast.makeText(this@Mapa, "Permissão Inválida: Não pode editar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@Mapa, "Permissão Inválida", Toast.LENGTH_SHORT).show()
         }
     }
 
