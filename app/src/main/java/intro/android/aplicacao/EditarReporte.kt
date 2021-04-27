@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import androidx.core.app.ActivityCompat
@@ -98,22 +99,25 @@ class EditarReporte : AppCompatActivity() {
         bt_guardar.setOnClickListener {
             val replyIntent = Intent()
             if(utilizador_id == id.toString()){
-                //Descrição
-                val descricao = editDescricao.text.toString()
-                replyIntent.putExtra(Mapa.EXTRA_DESCRICAO, descricao)
+                if(TextUtils.isEmpty(editDescricao.text)){
+                    setResult(Activity.RESULT_CANCELED, replyIntent)
+                } else {
+                    //Descrição
+                    val descricao = editDescricao.text.toString()
+                    replyIntent.putExtra(Mapa.EXTRA_DESCRICAO, descricao)
 
-                //Mantém o utilizador id
-                replyIntent.putExtra(Mapa.EXTRA_UTILIZADOR_ID, id.toString())
+                    //Mantém o utilizador id
+                    replyIntent.putExtra(Mapa.EXTRA_UTILIZADOR_ID, id.toString())
 
-                //Localização
-                replyIntent.putExtra(Mapa.EXTRA_LATITUDE, latitude.toString())
-                replyIntent.putExtra(Mapa.EXTRA_LONGITUDE, longitude.toString())
+                    //Localização
+                    replyIntent.putExtra(Mapa.EXTRA_LATITUDE, latitude.toString())
+                    replyIntent.putExtra(Mapa.EXTRA_LONGITUDE, longitude.toString())
 
-                //ID de reporte
-                replyIntent.putExtra(Mapa.EXTRA_ID, idReporte.toString())
+                    //ID de reporte
+                    replyIntent.putExtra(Mapa.EXTRA_ID, idReporte.toString())
 
-                setResult(Activity.RESULT_OK, replyIntent)
-
+                    setResult(Activity.RESULT_OK, replyIntent)
+                }
             }else {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             }
