@@ -35,7 +35,9 @@ class MainActivity : AppCompatActivity(), CellClickListener{
         var login = findViewById<Button>(R.id.voltarLogin)
         login.setOnClickListener {
             val intent = Intent(this@MainActivity, Login::class.java)
-            startActivity(intent) }
+            startActivity(intent)
+            finish()
+        }
 
         //Recycler View
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)

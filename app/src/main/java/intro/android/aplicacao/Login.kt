@@ -34,6 +34,7 @@ class Login : AppCompatActivity() {
         notas.setOnClickListener {
             val intent = Intent(this@Login, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         editNome = findViewById(R.id.nome)

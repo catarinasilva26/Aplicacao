@@ -45,6 +45,7 @@ class VisualizarNota : AppCompatActivity() {
         bt_voltar.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         //Botão Guardar

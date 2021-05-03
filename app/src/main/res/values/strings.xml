@@ -20,6 +20,6 @@
     <string name="imagem">Imagem</string>
     <string name="reportar">Reportar</string>
     <string name="campos_vazios">Campos obrigatórios vazios</string>
-    <string name="permissao_invalida">Não foi possível editar</string>
+    <string name="permissao_invalida">Algo deu errado</string>
     <string name="conteudo">Conteúdo</string>
 </resources>

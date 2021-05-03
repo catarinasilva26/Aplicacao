@@ -21,6 +21,6 @@
     <string name="imagem">Image</string>
     <string name="reportar">Report</string>
     <string name="campos_vazios">Required empty fields</string>
-    <string name="permissao_invalida">Unable to edit</string>
+    <string name="permissao_invalida">Something went wrong</string>
     <string name="conteudo">Content</string>
 </resources>
