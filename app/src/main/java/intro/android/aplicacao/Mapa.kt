@@ -1,7 +1,9 @@
 package intro.android.aplicacao
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.nfc.Tag
@@ -19,6 +21,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -40,6 +43,8 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
 
     private val UpdateReporteActivityRequestCode = 2
 
+    lateinit var preferences: SharedPreferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mapa)
@@ -47,6 +52,11 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        //Shared Preferences Login
+        preferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+
+        val id = preferences.getInt("id", 0)
 
         //Iniciar fusedlocationproviderclient
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
@@ -78,7 +88,12 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
                     ocorrencias = response.body()!!
                     for(ocorrencia in ocorrencias){
                         position = LatLng(ocorrencia.latitude.toString().toDouble(), ocorrencia.longitude.toString().toDouble())
-                        mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.id.toString()).snippet("Descrição: " + ocorrencia.descricao))
+                        if(ocorrencia.utilizador_id == id){
+                            mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.id.toString()).snippet("Descrição: " + ocorrencia.descricao))
+                        } else {
+                            mMap.addMarker(MarkerOptions().position(position).title(ocorrencia.id.toString()).snippet("Descrição: " + ocorrencia.descricao)).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
+                        }
+
                     }
 
                 }
