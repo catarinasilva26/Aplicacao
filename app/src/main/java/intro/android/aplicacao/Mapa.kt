@@ -12,8 +12,10 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.lifecycle.LiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -34,8 +36,11 @@ class Mapa : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClic
 
     private lateinit var mMap: GoogleMap
     private lateinit var ocorrencias: List<Ocorrencia>
+    private lateinit var ocorrenciasLive: LiveData<List<Ocorrencia>>
     private lateinit var voltarMenu : Button
     private lateinit var reportar : ImageButton
+
+    private lateinit var filtro : SearchView
 
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient

@@ -58,6 +58,13 @@
             android:id="@+id/reportarSituacao"/>
 
     </RelativeLayout>
+
+    <SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/filtro"
+        android:layout_margin="2dp"/>
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"

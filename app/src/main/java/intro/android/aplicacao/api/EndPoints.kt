@@ -35,4 +35,7 @@ interface EndPoints {
 
     @POST("CM/api/eliminarSituacao/{id}")
     fun eliminarSituacaoId(@Path("id") id:String?): Call<OutputEliminar>
+
+    @GET("CM/api/filtrarSituacao/{filtro}")
+    fun filtrarSituacao(@Path("filtro") filtro:String?): Call<List<Ocorrencia>>
 }

@@ -40,6 +40,7 @@ class AdicionarNota : AppCompatActivity() {
         bt_voltar.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
     companion object{
